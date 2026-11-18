@@ -1,0 +1,47 @@
+{
+  "publisher": "Epoch AI",
+  "title": "Data on AI chip imports",
+  "release": "2026-11-12",
+  "downloaded": "2026-11-18",
+  "source": "https://epoch.ai/data/ai_chip_trade/ai_chip_trade_by_country.csv",
+  "methodology": "https://epoch.ai/data/ai-chip-imports-documentation/methodology",
+  "license": "CC BY 4.0",
+  "sha256": "4df64317375d4557f84923f96ef62a43b660b623a4ae3c2091a4fd159688139b",
+  "rows": 3960,
+  "columns": 32,
+  "quarters": [
+    "2022 Q1",
+    "2022 Q2",
+    "2022 Q3",
+    "2022 Q4",
+    "2023 Q1",
+    "2023 Q2",
+    "2023 Q3",
+    "2023 Q4",
+    "2024 Q1",
+    "2024 Q2",
+    "2024 Q3",
+    "2024 Q4",
+    "2025 Q1",
+    "2025 Q2",
+    "2025 Q3",
+    "2025 Q4",
+    "2026 Q1",
+    "2026 Q2"
+  ],
+  "destinations": 220,
+  "latest_quarter_validation": {
+    "units": {
+      "total": "2753026.9",
+      "us_estimate": "2016610.9",
+      "us_share": "0.7325067909797757515554969695",
+      "unspecified": "18.4"
+    },
+    "compute": {
+      "total": "5429241.2",
+      "us_estimate": "4205172.0",
+      "us_share": "0.7745413852676134558177301093",
+      "unspecified": "45.9"
+    }
+  }
+}

@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Explore where AI chips are estimated to arrive, how chip counts differ from computing power, and what customs records can and cannot tell us.">
+  <title>Where AI Chips Go</title>
+  <link rel="stylesheet" href="style.css">
+  <script type="module" src="app.js"></script>
+</head>
+<body>
+<a class="skip" href="#explore">Skip to the interactive charts</a>
+<header class="site-header shell">
+  <a class="wordmark" href="#"><svg viewBox="0 0 32 32" width="28" height="28" aria-hidden="true"><rect x="7" y="7" width="18" height="18" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M11 1v6m10-6v6M11 25v6m10-6v6M1 11h6m-6 10h6m18-10h6m-6 10h6" stroke="currentColor" stroke-width="2"/><rect x="12" y="12" width="8" height="8" fill="currentColor"/></svg> Where AI Chips Go</a>
+  <nav aria-label="Article"><a href="#explore">Explore the estimates</a><a href="#uncertainty">Read the ranges</a><a href="#methods">Sources & methods</a></nav>
+</header>
+<main>
+  <section class="hero shell">
+    <p class="eyebrow">An explorable explanation · Initial prototype</p>
+    <h1>Where AI<br>chips <em>go.</em></h1>
+    <div class="hero-bottom"><p class="dek">Where do AI chips go, and how much can trade records tell us?</p><p class="hero-context">A shipment is a clue, not a complete picture. Follow the estimates from customs records to chip counts—and see what changes when we count computing power instead.</p></div>
+    <p class="byline">Valmik Nahata · Varun Sinha · Rishab Kolan · Rishil Chintalapati <span>UC San Diego · DSC 106</span></p>
+    <div class="opening-finding" id="opening-finding"><p>Loading the Epoch AI estimates…</p></div>
+  </section>
+
+  <section class="context shell section-rule" aria-labelledby="context-title">
+    <div><p class="eyebrow">The clue</p><h2 id="context-title">One shipment.<br>Two records.<br>An incomplete picture.</h2></div>
+    <div class="context-copy"><p>Hardware leaving Taiwan appears in export records and again in import records. But the agencies can classify the same hardware differently. In our proposal’s Taiwan–U.S. example, the four hardware categories roughly agree in total while differing sharply one by one.</p><p>Epoch AI combines customs records with chip-sales estimates, accounts for re-exports, and estimates the AI-specific portion of hardware trade. <strong>These are estimated arrivals, not a census of chips running in data centers.</strong></p><p class="small">An H100-equivalent (H100e) expresses computing power relative to an NVIDIA H100. A chip count weights every chip equally; an H100e estimate does not. <a href="https://epoch.ai/data/ai-chip-imports-documentation/methodology">Read Epoch AI’s methodology.</a></p></div>
+  </section>
+
+  <section id="explore" class="shell section-rule" aria-labelledby="explore-title">
+    <div class="section-heading"><div><p class="eyebrow">The exploration</p><h2 id="explore-title">Same quarter.<br>Different yardstick.</h2></div><p>Select a quarter, then switch the measure. Compare new arrivals during that quarter, or arrivals accumulated since 2022. Select a bar to inspect a destination.</p></div>
+    <p id="load-error" role="alert" hidden></p>
+    <div class="chart-panel">
+      <div class="controls">
+        <label>Quarter<select id="quarter" disabled aria-controls="ranking-chart uncertainty-chart trend-chart"></select></label>
+        <label>Time window<select id="scope" disabled><option value="quarterly">Arriving this quarter</option><option value="cumulative">Arrived since 2022</option></select></label>
+        <fieldset id="metric-controls" disabled><legend>Measure</legend><div class="segmented"><label><input type="radio" name="metric" value="compute" checked><span>Computing power <small>H100e</small></span></label><label><input type="radio" name="metric" value="units"><span>Chip units</span></label></div></fieldset>
+      </div>
+      <div class="chart-heading"><h3 id="ranking-title">Estimated arrivals by destination</h3><p id="view-status" role="status" aria-live="polite"></p></div>
+      <div id="ranking-chart" class="chart" aria-label="Interactive destination ranking"></div>
+      <p id="ranking-note" class="chart-note"></p>
+      <p class="small">Top 10 named destinations, re-sorted for each view. Shares use all destination rows, including Unspecified. The European Union is one destination; its member states are not added again. Hover, tap, or focus a bar for details.</p>
+      <div class="destination-detail">
+        <label>Look more closely<select id="destination" disabled></select></label>
+        <div id="destination-summary" aria-live="polite"></div>
+      </div>
+      <details class="data-details"><summary>Read the chart as a data table</summary><div class="table-scroll"><table><caption id="table-caption"></caption><thead><tr><th scope="col">Destination</th><th scope="col">Estimate</th><th scope="col">Share</th><th scope="col">Low</th><th scope="col">High</th></tr></thead><tbody id="ranking-table"></tbody></table></div></details>
+    </div>
+  </section>
+
+  <section id="uncertainty" class="shell section-rule" aria-labelledby="uncertainty-title">
+    <div class="section-heading"><div><p class="eyebrow">The complication</p><h2 id="uncertainty-title">A rank is not<br>a certainty.</h2></div><p>A dot looks precise. The range around it tells a more cautious story. Here are the seven leading non-U.S. destinations in the same selected view, with the U.S. omitted to keep smaller differences visible.</p></div>
+    <div class="chart-panel"><div class="chart-heading"><h3 id="range-title">Publisher estimates and ranges</h3><p><span class="range-key" aria-hidden="true"></span> Low–high range · dot = main estimate</p></div><div id="uncertainty-chart" class="chart"></div><p class="chart-note" id="range-note"></p><p class="small">Lines use the CSV’s published low and high values directly. They are not conventional statistical confidence intervals. Overlap suggests a ranking deserves caution; it is not a formal test of a difference. Range endpoints are never added across destinations or quarters.</p></div>
+  </section>
+
+  <section class="shell section-rule" aria-labelledby="trend-title"><div class="section-heading"><div><p class="eyebrow">The longer view</p><h2 id="trend-title">The picture keeps moving.</h2></div><p id="trend-description">Quarterly arrivals across all destinations. Select a point to explore that quarter in the charts above.</p></div><div class="chart-panel"><div id="trend-chart" class="chart"></div><p id="trend-note" class="small"></p></div></section>
+
+  <section class="takeaway shell section-rule"><p class="eyebrow">What to take away</p><h2>Count the chips.<br>Then question the count.</h2><p>Trade records help us estimate where AI hardware arrives, <strong>and</strong> those estimates reveal large differences between destinations. <strong>But</strong> hardware models, trade classifications, and allocation assumptions change what those numbers mean. <strong>Therefore</strong>, compare both chip units and computing power, and read the uncertainty before treating a ranking as settled.</p></section>
+
+  <section id="methods" class="shell section-rule methods" aria-labelledby="methods-title"><div><p class="eyebrow">Behind the estimates</p><h2 id="methods-title">Sources & methods</h2></div><div>
+    <p>Source: <a href="https://epoch.ai/data/ai-chip-imports">Epoch AI, Data on AI chip imports</a>, November 12, 2026 release, downloaded November 18, 2026. The bundled destination CSV contains 3,960 rows and 32 columns: 220 destination labels across 18 quarters, from 2022 Q1 through 2026 Q2. Data credited to Epoch AI under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.</p>
+    <details><summary>How we calculate the views</summary><p>The quarterly view reads the “Quarterly number of units” or “Quarterly compute capacity (H100e)” column. The cumulative view reads the corresponding “Cumulative” column at the selected quarter. We do not sum cumulative records over time. Totals sum the selected estimate once per destination. A destination’s share is its estimate divided by that total, including Unspecified; the ranking omits Unspecified as it is not a location. The time series always shows quarterly totals, even when the ranking is cumulative.</p><p>The dataset reports the EU as a bloc and contains no separate EU-member rows. We retain the publisher’s destination labels instead of regrouping overlapping regions. Blank numeric fields remain missing rather than becoming zero. Fractional chip units reflect estimates; displayed values and percentages are rounded only for readability.</p></details>
+    <details><summary>What these records cannot establish</summary><p>Estimated arrivals are not the same as installed or operational computing capacity. Hardware can move onward, and the accumulated series does not deduct retirement or later relocation. Model mixes within destinations are inferred. The publisher distinguishes conditional model intervals from structural alternatives and notes that some reporting, timing, and allocation errors remain uncovered. We use the exported low–high fields without assigning them a confidence level or inventing a joint distribution.</p><p>The current methodology page contains some summary values that differ slightly from this CSV snapshot. All charts here use the bundled CSV, which reproduces the proposal’s quarterly figures. Consult the <a href="https://epoch.ai/data/ai-chip-imports-documentation/methodology">full methodology</a> for assumptions and limitations.</p></details>
+    <p class="source-links"><a href="data/ai_chip_trade_by_country.csv" download>Download the source CSV</a><a href="https://epoch.ai/data/ai_chip_trade/ai_chip_trade_by_country.csv">Publisher CSV</a><a href="https://github.com/vsinha99/dsc106-final-project">Project source</a></p>
+  </div></section>
+
+  <section id="progress" class="shell section-rule" aria-labelledby="progress-title"><p class="eyebrow">Initial prototype · November 18, 2026</p><h2 id="progress-title">Prototype Progress and Challenges</h2><div class="progress-grid">
+    <article><h3>What have you done so far?</h3><p>We have built an interactive article around the same research question and Epoch AI dataset used in our proposal. We checked the destination CSV, separated quarterly arrivals from cumulative estimates, and kept the unspecified destination in the share denominator. The main D3 chart now lets readers choose a quarter, switch between chip units and H100-equivalent computing power, and inspect individual destinations. A linked dot-and-range chart shows the publisher’s uncertainty bounds, while a quarterly time series puts the selected period in context. We also added source notes, keyboard-accessible chart details, and a data table so readers can check what the visual marks represent.</p></article>
+    <article><h3>What will be the most challenging part of your project to design and why?</h3><p>The hardest part will be helping readers understand uncertainty without making every comparison feel meaningless. The estimates depend on customs classifications, re-export adjustments, and assumptions about which chip models reach each destination. We need to explain why a place can have a larger share of chip units than computing power while making clear that the model mix is inferred rather than directly observed. Keeping small destinations readable beside the much larger United States estimate is another design challenge, especially on phones. For the final version, we plan to test the narrative with readers and refine the annotations so that overlapping ranges and uncertain rankings are difficult to overlook.</p></article>
+  </div></section>
+</main>
+<footer class="shell"><p>Where AI Chips Go · UC San Diego DSC 106</p><p>Estimates by Epoch AI. Interpretation and visualization by our team.</p></footer>
+<div id="tooltip" role="tooltip" hidden></div>
+</body>
+</html>
