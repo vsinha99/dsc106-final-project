@@ -14,6 +14,10 @@ const definition = () => METRICS[state.metric];
 const tooltip = $('#tooltip');
 
 function hideTooltip() { tooltip.hidden = true; }
+function axisTickValues(scale, span) {
+  const ticks = scale.ticks(Math.max(1, Math.min(5, Math.floor(span / 75))));
+  return ticks.length < 2 ? [0, scale.domain()[1]] : ticks;
+}
 function showTooltip(event, row, range = false) {
   const value = row[state.scope][state.metric];
   const selected = quarterRows(rows, state.quarter);
@@ -82,7 +86,7 @@ function renderRanking(selected) {
     .range([margin.left, Math.max(margin.left + 30, width - margin.right)]);
   svg.attr('aria-label', `${state.quarter}: top destinations by estimated ${definition().label.toLowerCase()}, ${state.scope}`);
   svg.select('.axis').attr('transform', `translate(0,${height - margin.bottom})`)
-    .call(d3.axisBottom(x).ticks(width < 600 ? 3 : 5).tickFormat(compact).tickSize(-(height - margin.top - margin.bottom)));
+    .call(d3.axisBottom(x).tickValues(axisTickValues(x, x.range()[1] - x.range()[0])).tickFormat(compact).tickSize(-(height - margin.top - margin.bottom)));
   const marks = svg.select('.marks').selectAll('g.row').data(leaders, row => row.country)
     .join(enter => {
       const g = enter.append('g').attr('class', 'row');
@@ -148,7 +152,7 @@ function renderUncertainty(selected) {
     .range([margin.left, width - 15]);
   svg.attr('aria-label', `Publisher low-to-high ${definition().unit} ranges for leading non-U.S. destinations, ${state.quarter}, ${state.scope}`);
   svg.select('.axis').attr('transform', `translate(0,${height - margin.bottom})`)
-    .call(d3.axisBottom(x).ticks(width < 600 ? 3 : 5).tickFormat(compact).tickSize(-(height - margin.top - margin.bottom)));
+    .call(d3.axisBottom(x).tickValues(axisTickValues(x, x.range()[1] - x.range()[0])).tickFormat(compact).tickSize(-(height - margin.top - margin.bottom)));
   const marks = svg.select('.marks').selectAll('g.row').data(leaders, row => row.country)
     .join(enter => {
       const g = enter.append('g').attr('class', 'row');
@@ -190,7 +194,9 @@ function renderTrend() {
     .attr('role', 'group').attr('aria-label', `Global quarterly ${definition().label.toLowerCase()} estimates. Select a point to change quarter.`);
   svg.selectAll('.trend-y').data([null]).join('g').attr('class', 'axis trend-y').attr('transform', `translate(${margin.left},0)`)
     .call(d3.axisLeft(y).ticks(4).tickFormat(compact).tickSize(-(width - margin.left - margin.right)));
-  const tickQuarters = quarters.filter((quarter, i) => width < 600 ? i % 8 === 0 || i === quarters.length - 1 : quarter.endsWith('Q1'));
+  const tickQuarters = width < 600
+    ? [quarters[0], quarters[Math.floor((quarters.length - 1) / 2)], quarters.at(-1)]
+    : quarters.filter(quarter => quarter.endsWith('Q1'));
   svg.selectAll('.trend-x').data([null]).join('g').attr('class', 'axis trend-x').attr('transform', `translate(0,${height - margin.bottom})`)
     .call(d3.axisBottom(x).tickValues(tickQuarters).tickFormat(q => q.replace(' ', '\u00a0')).tickSize(0));
   const line = d3.line().defined(p => p.value !== null).x(p => x(p.quarter)).y(p => y(p.value));

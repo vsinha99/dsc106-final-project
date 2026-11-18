@@ -22,7 +22,7 @@ The first two categories require successful publication; they are not inferred f
 - Linked time-series selection changes the quarter above. Destination details show both shares and ranks, including Japan's cumulative rank change.
 - Keyed mark identity survives metric changes; intermediate bar widths establish actual animation rather than only checking transition declarations. Reduced-motion mode skips animation.
 - Viewports: 1440×1000, 768×1000, 375×812, and 320×667. Chart labels and SVGs fit inside the viewport. No horizontal document overflow. The data table has its own scrolling container.
-- Screenshots of the hero, ranking and uncertainty views inspected at desktop and mobile sizes. A mobile select overflow was identified and corrected before publication.
+- Screenshots of the hero, ranking, uncertainty and time-series views inspected at desktop and mobile sizes. A mobile select overflow and crowded axis labels were identified and corrected; horizontal tick-label overlap is now checked explicitly.
 - Both progress paragraphs have five complete sentences. Data, JS, CSS, local assets and internal source links load; no relevant JavaScript console errors in tested interactions.
 - The same browser suite is used against the published site after deployment.
 

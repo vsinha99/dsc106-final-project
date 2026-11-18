@@ -84,6 +84,9 @@ try {
    assert(await ev(`{const r=document.querySelector('#${id} svg').getBoundingClientRect();r.left>=0&&r.right<=innerWidth+1}`));
    assert(await ev(`Array.from(document.querySelectorAll('#${id} svg text')).every(e=>{const r=e.getBoundingClientRect();return r.left>=-1&&r.right<=innerWidth+1})`));
   }
+  for(const selector of ['#ranking-chart .axis text','#uncertainty-chart .axis text','#trend-chart .trend-x text']) {
+   assert(await ev(`{const rects=[...document.querySelectorAll('${selector}')].map(e=>e.getBoundingClientRect()).sort((a,b)=>a.left-b.left);rects.every((r,i)=>i===0||rects[i-1].right+3<=r.left)}`),'Overlapping horizontal tick labels: '+selector);
+  }
   await ev(`document.querySelector('#uncertainty').scrollIntoView({behavior:'instant'})`);await pause(250);await screenshot(`/private/tmp/chips-${width}-ranges.png`);
   console.log('PASS responsive charts and labels',width,height);
  }
