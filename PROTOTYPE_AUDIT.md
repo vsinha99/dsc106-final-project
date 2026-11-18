@@ -4,14 +4,14 @@ Assignment: <https://dsc106.com/projects/final_project/>. Proposal inspected: `F
 
 ## Rubric
 
-| Category | Points | Implementation and evidence |
-| --- | --- | --- |
-| Webpage | 0.5 | Root `index.html`; GitHub Pages publication and public HTTP/browser checks reported in delivery. |
-| Public GitHub repository | 0.5 | Separate `vsinha99/dsc106-final-project`; public repository accessibility checked at publication. |
-| Visualization and interaction | 1 | Three real D3 visualizations. Quarter, metric, time-window and destination interactions change the charts and details. All 72 data combinations browser-tested. |
-| Writeup | 1 | Visible `#progress` section, exact user-requested subsection headings, five complete sentences per question, ten total. Sentence counts checked in the browser. |
+| Category | Points | Result | Implementation and evidence |
+| --- | --- | --- | --- |
+| Webpage | 0.5 | PASS | [Live GitHub Pages site](https://vsinha99.github.io/dsc106-final-project/) returns HTTP 200; complete browser suite passed on the public URL. |
+| Public GitHub repository | 0.5 | PASS | [Separate public repository](https://github.com/vsinha99/dsc106-final-project) returns HTTP 200 without authentication; GitHub API confirms `private: false`. |
+| Visualization and interaction | 1 | PASS | Three real D3 visualizations. Quarter, metric, time-window and destination interactions change the charts and details. All 72 data combinations browser-tested locally and publicly. |
+| Writeup | 1 | PASS | Visible `#progress` section, exact user-requested subsection headings, five complete sentences per question, ten total. Sentence counts checked on the public page. |
 
-The first two categories require successful publication; they are not inferred from local implementation. See the delivery report for the verified URLs and final publication status.
+Publication verified November 18, 2026. GitHub Pages built application commit `f7681712387c51c97e902e97a6bf9346bf8e59c8` from `main` and `/`. Live HTML, JavaScript, CSS, source CSV, source metadata and bundled D3 matched the tested local files byte for byte. The complete live browser suite passed all 72 data views, tooltip/keyboard/selection/transition interactions, four viewport sizes, label-overlap checks, source links and writeup sentence counts, with no relevant JavaScript console errors. This audit records implementation evidence, not a guarantee of the staff-assigned grade.
 
 ## Verification
 
